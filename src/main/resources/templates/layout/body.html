@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div id="body">
+            <p th:each="picture: ${picturesList}" th:text="${picture.number}"></p>
+        </div>
+    </body>
+</html>

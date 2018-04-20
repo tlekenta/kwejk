@@ -6,8 +6,7 @@
     <title>kwejk</title>
 </head>
     <body>
-        <p th:text="'Hello, ' + ${name} + '!'" ></p>
-
-        <p th:each="picture: ${picturesList}" th:text="${picture.number}"></p>
+        <div th:replace="layout/header"></div>
+        <div th:replace="layout/body"></div>
     </body>
 </html>
