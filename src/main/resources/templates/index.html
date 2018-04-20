@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>kwejk</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="@{/css/main.css}">
 </head>
-    <body>
-        <div th:replace="layout/header"></div>
-        <div th:replace="layout/body"></div>
+    <body class="main">
+        <div th:include="layout/header"></div>
+        <div th:include="layout/body"></div>
     </body>
 </html>

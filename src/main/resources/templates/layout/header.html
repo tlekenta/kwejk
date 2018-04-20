@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../static/css/header.css" th:href="@{/css/header.css}">
+    </head>
+
     <body>
-        <div id="header">
-            <p th:text="'Hello, ' + ${name} + '!'" ></p>
-        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:text="'Hello, ' + ${name} + '!'"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Główna</a></li>
+                        <li><a href="#">Top miesiąca</a></li>
+                        <li><a href="#">Top roku</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </body>
 </html>

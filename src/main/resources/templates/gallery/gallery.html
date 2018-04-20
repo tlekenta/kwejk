@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:each="picture: ${picturesList}" th:include="gallery/picture" th:with="aPicture=${picture}"></div>
+    </body>
+</html>

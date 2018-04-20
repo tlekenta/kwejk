@@ -2,8 +2,12 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
-        <div id="body">
-            <p th:each="picture: ${picturesList}" th:text="${picture.number}"></p>
+        <div class="row">
+            <div class="col-lg-2 col-sm-0"></div>
+            <div class="col-lg-8 col-sm-12">
+                <div th:replace="gallery/gallery"></div>
+            </div>
+            <div class="col-lg-2 col-sm-0"></div>
         </div>
     </body>
 </html>
