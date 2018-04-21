@@ -7,18 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import pl.edu.wat.pze.kwejk.services.PictureService;
 
 @Controller
-public class MainController {
+public class GalleryController {
 
     private PictureService pictureService;
 
-    public MainController(PictureService pictureService) {
+    public GalleryController(PictureService pictureService) {
         this.pictureService = pictureService;
     }
 
-    @GetMapping("/{aPageNumber}")
-    public String gallery(@PathVariable int aPageNumber, Model aModel) {
+    @GetMapping(value = {"/", "/{aPageNumber}"})
+    public String getGallery(@PathVariable(required = false) Integer aPageNumber, Model aModel) {
+        if(aPageNumber == null)
+            aPageNumber = 1;
         aModel.addAttribute("name", aPageNumber);
-        pictureService.updatePictures(aModel, aPageNumber);
+        aModel.addAttribute("picturesList", pictureService.getPicturesForPage(aPageNumber));
         return "index.html";
     }
 
