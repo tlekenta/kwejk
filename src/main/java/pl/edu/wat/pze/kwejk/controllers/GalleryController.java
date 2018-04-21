@@ -4,15 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import pl.edu.wat.pze.kwejk.services.PaginationService;
 import pl.edu.wat.pze.kwejk.services.PictureService;
 
 @Controller
 public class GalleryController {
 
     private PictureService pictureService;
+    private PaginationService paginationService;
 
-    public GalleryController(PictureService pictureService) {
+    public GalleryController(PictureService pictureService, PaginationService paginationService) {
         this.pictureService = pictureService;
+        this.paginationService = paginationService;
     }
 
     @GetMapping(value = {"/", "/{aPageNumber}"})
@@ -21,6 +24,7 @@ public class GalleryController {
             aPageNumber = 1;
         aModel.addAttribute("name", aPageNumber);
         aModel.addAttribute("picturesList", pictureService.getPicturesForPage(aPageNumber));
+        aModel.addAttribute("pagesList", paginationService.getPagesList(aPageNumber));
         return "index.html";
     }
 
