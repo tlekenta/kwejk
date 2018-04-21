@@ -1,0 +1,22 @@
+.gallery-container {
+    /*background: #2c2d35;*/
+}
+
+.gallery-item {
+    background: black;
+    margin: 2% 10%;
+    padding: 1% 5% 5% 5%;
+}
+
+.gallery-item img {
+    width: 100%;
+    margin-top: 1%;
+}
+
+.gallery-item h2 {
+    color: white;
+}
+
+.gallery-item h3 {
+    color: #333333;
+}

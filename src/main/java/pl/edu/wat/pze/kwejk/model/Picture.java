@@ -7,6 +7,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class Picture {
 
-    private Integer number;
+    private String path;
+
+    private String title;
+
+    private String description;
 
 }

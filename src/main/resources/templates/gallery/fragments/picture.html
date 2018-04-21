@@ -2,6 +2,8 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
-        <p th:text="${aPicture.number}"></p>
+        <h2 th:text="${aPicture.title}"></h2>
+        <h3 th:text="${aPicture.description}"></h3>
+        <img th:src="@{img/} + ${aPicture.path}"/>
     </body>
 </html>
