@@ -3,7 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
         <ul class="pagination">
+            <li><a href="#">&lt;</a></li>
+            <li><a href="#">&lt;&lt;</a></li>
             <li th:each="page: ${pagesList}" th:class="*{page.isActive}? 'active' : ''"><a href="#" th:text="*{page.number}"></a></li>
+            <li><a href="#">&gt;&gt;</a></li>
+            <li><a href="#">&gt;</a></li>
         </ul>
     </body>
 </html>
