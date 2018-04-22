@@ -2,8 +2,15 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
-        <h2 th:text="${aPicture.title}"></h2>
-        <h3 th:text="${aPicture.description}"></h3>
-        <img th:src="@{img/} + ${aPicture.path}"/>
+        <a th:if="${aPicture.article} != null" th:href="@{'/article/' + ${picture.article.id}}">
+            <h2 th:text="${aPicture.title}"></h2>
+            <h3 th:text="${aPicture.description}"></h3>
+            <img th:src="@{img/} + ${aPicture.path}"/>
+        </a>
+        <a th:if="${aPicture.article} == null">
+            <h2 th:text="${aPicture.title}"></h2>
+            <h3 th:text="${aPicture.description}"></h3>
+            <img th:src="@{img/} + ${aPicture.path}"/>
+        </a>
     </body>
 </html>

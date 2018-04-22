@@ -5,17 +5,16 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Picture {
+public class Article {
 
     private Long id;
 
-    private String path;
-
     private String title;
 
-    private String description;
+    //zmapować na odpowiedni typ
+    private String content;
 
-    //nullable
-    private Article article;
+    //not null
+    private Picture picture;
 
 }
