@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.edu.wat.pze.kwejk.model.ModelAttributeEnum;
 import pl.edu.wat.pze.kwejk.model.ViewEnum;
 import pl.edu.wat.pze.kwejk.service.ArticleService;
 
@@ -21,8 +22,8 @@ public class ArticleController {
     @GetMapping("/{aArticleId}")
     public String getArticle(@PathVariable Long aArticleId, Model aModel) {
 
-        aModel.addAttribute("activeView", ViewEnum.ARTICLE);
-        aModel.addAttribute("actualArticle", articleService.getArticle(aArticleId));
+        aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.ARTICLE);
+        aModel.addAttribute(ModelAttributeEnum.ACTUAL_ARTICLE.toString(), articleService.getArticle(aArticleId));
 
         return "index";
     }
