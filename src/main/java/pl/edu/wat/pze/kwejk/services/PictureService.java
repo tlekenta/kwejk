@@ -1,24 +1,21 @@
 package pl.edu.wat.pze.kwejk.services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.edu.wat.pze.kwejk.MockService;
 import pl.edu.wat.pze.kwejk.model.Picture;
+import pl.edu.wat.pze.kwejk.repository.PictureRepository;
 
-import java.util.Arrays;
 import java.util.List;
 
 
 @Service
+@AllArgsConstructor
 public class PictureService {
 
-    private MockService mockService;
-
-    public PictureService(MockService mockService) {
-        this.mockService = mockService;
-    }
+    PictureRepository pictureRepository;
 
     public List<Picture> getPicturesForPage(int aPageNumber){
-        return Arrays.asList(mockService.getMOCK_PICTURES());
+        return pictureRepository.findAll();
     }
 
 }

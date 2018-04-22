@@ -19,7 +19,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{aArticleId}")
-    public String getArticle(@PathVariable Integer aArticleId, Model aModel) {
+    public String getArticle(@PathVariable Long aArticleId, Model aModel) {
 
         aModel.addAttribute("activeView", ViewEnum.ARTICLE);
         aModel.addAttribute("actualArticle", articleService.getArticle(aArticleId));
