@@ -22,9 +22,10 @@ public class GalleryController {
     public String getGallery(@PathVariable(required = false) Integer aPageNumber, Model aModel) {
         if(aPageNumber == null)
             aPageNumber = 1;
-        aModel.addAttribute("name", aPageNumber);
+        aModel.addAttribute("actualPageNumber", aPageNumber);
+        aModel.addAttribute("lastPageNumber", PaginationService.MAX_PAGE);
         aModel.addAttribute("picturesList", pictureService.getPicturesForPage(aPageNumber));
-        aModel.addAttribute("pagesList", paginationService.getPagesList(aPageNumber));
+        aModel.addAttribute("pagesNumbersList", paginationService.getPagesList(aPageNumber));
         return "index.html";
     }
 

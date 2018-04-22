@@ -2,12 +2,14 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
-        <ul class="pagination">
-            <li><a href="#">&lt;</a></li>
-            <li><a href="#">&lt;&lt;</a></li>
-            <li th:each="page: ${pagesList}" th:class="*{page.isActive}? 'active' : ''"><a href="#" th:text="*{page.number}"></a></li>
-            <li><a href="#">&gt;&gt;</a></li>
-            <li><a href="#">&gt;</a></li>
+        <ul class="pagination pagination-lg">
+            <li><a th:href="@{1}">&lt;&lt;</a></li>
+            <li th:class="${actualPageNumber} == 1 ? 'disabled' : ''"><a th:href="@{${actualPageNumber} - 1}">&lt;</a></li>
+            <li th:each="pageNumber: ${pagesNumbersList}" th:class="*{pageNumber} == ${actualPageNumber} ? 'active' : ''">
+                <a th:href="@{'/' + *{pageNumber}}" th:text="*{pageNumber}"></a>
+            </li>
+            <li th:class="${actualPageNumber} == ${lastPageNumber} ? 'disabled' : ''"><a th:href="@{${actualPageNumber} + 1}">&gt;</a></li>
+            <li><a th:href="@{${lastPageNumber}}">&gt;&gt;</a></li>
         </ul>
     </body>
 </html>
