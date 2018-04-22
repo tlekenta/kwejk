@@ -2,20 +2,20 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" type="text/css" href="../../static/css/gallery.css" th:href="@{/css/gallery.css}">
+        <link rel="stylesheet" type="text/css" href="../static/css/gallery.css" th:href="@{/css/gallery.css}">
     </head>
 
     <body>
         <div class="gallery-container">
             <div class="gallery-item"
                  th:each="picture: ${picturesList}"
-                 th:include="gallery/fragments/picture"
+                 th:include="fragments/gallery/picture"
                  th:with="aPicture=${picture}">
             </div>
         </div>
 
         <div class="text-center"
-             th:include="gallery/fragments/pages">
+             th:include="fragments/gallery/pagination">
         </div>
     </body>
 </html>

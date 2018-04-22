@@ -1,12 +1,12 @@
-package pl.edu.wat.pze.kwejk.controllers;
+package pl.edu.wat.pze.kwejk.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.edu.wat.pze.kwejk.model.ViewEnum;
-import pl.edu.wat.pze.kwejk.services.PaginationService;
-import pl.edu.wat.pze.kwejk.services.PictureService;
+import pl.edu.wat.pze.kwejk.service.PaginationService;
+import pl.edu.wat.pze.kwejk.service.PictureService;
 
 @Controller
 public class GalleryController {

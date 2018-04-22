@@ -1,4 +1,4 @@
-package pl.edu.wat.pze.kwejk.controllers;
+package pl.edu.wat.pze.kwejk.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.edu.wat.pze.kwejk.model.ViewEnum;
-import pl.edu.wat.pze.kwejk.services.ArticleService;
+import pl.edu.wat.pze.kwejk.service.ArticleService;
 
 @Controller
 @RequestMapping("/article")

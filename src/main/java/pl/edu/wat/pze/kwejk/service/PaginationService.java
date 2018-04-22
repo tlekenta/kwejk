@@ -1,4 +1,4 @@
-package pl.edu.wat.pze.kwejk.services;
+package pl.edu.wat.pze.kwejk.service;
 
 import org.springframework.stereotype.Service;
 
