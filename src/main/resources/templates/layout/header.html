@@ -28,7 +28,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                 <span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a>
                         </li>
 
-                        <li sec:authorize="!isAuthenticated()">
+                        <li style="display: inline-flex;" sec:authorize="!isAuthenticated()">
+                            <a href="/register"><span class="glyphicon glyphicon-log-in"></span> Rejestracja</a>
                             <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a>
                         </li>
                     </ul>

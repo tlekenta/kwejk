@@ -7,4 +7,5 @@ public enum ViewEnum {
     GALLERY,
     ARTICLE,
     LOGIN,
+    REGISTER,
 }

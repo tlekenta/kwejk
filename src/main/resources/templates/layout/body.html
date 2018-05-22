@@ -7,6 +7,7 @@
             <div th:case="${T(pl.edu.wat.pze.kwejk.model.ViewEnum).GALLERY}" th:include="gallery" th:remove="tag"></div>
             <div th:case="${T(pl.edu.wat.pze.kwejk.model.ViewEnum).ARTICLE}" th:include="article" th:remove="tag"></div>
             <div th:case="${T(pl.edu.wat.pze.kwejk.model.ViewEnum).LOGIN}" th:include="auth/login" th:remove="tag"></div>
+            <div th:case="${T(pl.edu.wat.pze.kwejk.model.ViewEnum).REGISTER}" th:include="auth/register" th:remove="tag"></div>
         </div>
         <div class="col-lg-2 col-sm-0"></div>
     </body>

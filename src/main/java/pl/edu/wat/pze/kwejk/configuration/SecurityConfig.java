@@ -36,15 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence charSequence) {
-                System.out.println("encode" + charSequence);
-                return "";
+                System.out.println("encode: " + charSequence);
+                return charSequence.toString();
             }
 
             @Override
             public boolean matches(CharSequence charSequence, String s) {
-                System.out.println("matches" + charSequence);
-                System.out.println("matches" + s);
-                return true;
+                return charSequence.toString().equals(s);
             }
         };
     }
@@ -63,11 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     System.out.println("NIE ZALOGOWANO");
                 })
-                .defaultSuccessUrl("/?t=poprawniezalogowano")
+                .defaultSuccessUrl("/?t=poprawnie-zalogowano")
+                .failureUrl("/login?t=zle-dane")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/?t=poprawniewylogowano")
+                .logoutSuccessUrl("/?t=poprawnie-wylogowano")
                 .permitAll()
                 .and()
                 .csrf().disable();
