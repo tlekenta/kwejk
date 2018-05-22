@@ -1,5 +1,7 @@
 package pl.edu.wat.pze.kwejk.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,11 @@ public class GalleryController {
 
     @GetMapping(value = {"/", "/{aPageNumber}"})
     public String getGallery(@PathVariable(required = false) Integer aPageNumber, Model aModel) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.out.println(currentPrincipalName);
+
         if(aPageNumber == null)
             aPageNumber = 1;
         aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.GALLERY);

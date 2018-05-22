@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<body>
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-signin {
+        color: white;
+    }
+
+    .form-signin label {
+        font-size: 14px;
+        line-height: 2rem;
+        font-weight: lighter;
+    }
+
+    .form-signin .form-signin-heading, .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+
+    .form-signin .checkbox {
+        font-weight: normal;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+</style>
+<div id="app" class="text-center" style="padding:50px 0">
+    <form class="form-signin" action="/login" method="post">
+        <h2 class="form-signin-heading">Zaloguj się</h2>
+        <label for="inputEmail" class="text-left btn-block">Identyfikator</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Identyfikator" required autofocus>
+
+        <p></p>
+        <label for="inputPassword" class="text-left btn-block">Hasło</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+
+        <div class="checkbox text-left">
+            <!--
+           <label >
+               <input type="checkbox" value="remember-me"> Zapamiętaj mnie
+           </label>
+             -->
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-sm btn-block" type="submit">Zaloguj się</button>
+    </form>
+</div>
+
+</body>
+</html>

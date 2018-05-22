@@ -6,8 +6,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import pl.edu.wat.pze.kwejk.model.Article;
 import pl.edu.wat.pze.kwejk.model.Picture;
+import pl.edu.wat.pze.kwejk.model.User;
 import pl.edu.wat.pze.kwejk.repository.ArticleRepository;
 import pl.edu.wat.pze.kwejk.repository.PictureRepository;
+import pl.edu.wat.pze.kwejk.repository.UserRepository;
 
 import java.util.Arrays;
 
@@ -19,6 +21,8 @@ public class InitDatabase {
 
     PictureRepository pictureRepository;
 
+    UserRepository userRepository;
+
     @EventListener(ContextRefreshedEvent.class)
     public void initDb() {
         Picture[] pPictures = createPictures();
@@ -28,11 +32,20 @@ public class InitDatabase {
         pictureRepository.saveAll(Arrays.asList(pPictures));
         articleRepository.saveAll(Arrays.asList(pArticles));
 
+        userRepository.saveAll(Arrays.asList(createUsers()));
+
+
         pPictures[3].setArticle(pArticles[0]);
         pPictures[4].setArticle(pArticles[1]);
 
         pictureRepository.saveAll(Arrays.asList(pPictures));
 
+    }
+
+    private User[] createUsers() {
+        return new User[] {
+                User.builder().username("czesiek").password("grzesiek").build()
+        };
     }
 
     private Picture[] createPictures() {

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<body>
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-signin {
+        color: white;
+    }
+
+    .form-signin label {
+        font-size: 14px;
+        line-height: 2rem;
+        font-weight: lighter;
+    }
+
+    .form-signin .form-signin-heading, .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+
+    .form-signin .checkbox {
+        font-weight: normal;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+</style>
+<div id="app" class="text-center" style="padding:50px 0">
+    <form class="form-signin" action="/login" method="post">
+        <h2 class="form-signin-heading">Zarejestruj się</h2>
+
+        <label for="inputEmail" class="text-left btn-block">Identyfikator</label>
+        <input type="text" name="username" v-model="username" v-on:input="checkIfExist" id="inputEmail"
+               class="form-control" placeholder="Identyfikator" required autofocus>
+
+        <p></p>
+        <label for="inputPassword" class="text-left btn-block">Hasło</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+
+        <p></p>
+        <label for="inputPasswordRepeat" class="text-left btn-block">Powtórz Hasło</label>
+        <input type="password" name="password" id="inputPasswordRepeat" class="form-control" placeholder="Powtórz Hasło"
+               required>
+
+        <div class="checkbox text-left">
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-sm btn-block" type="submit">Zarejestruj się</button>
+    </form>
+    <!-- end:Main Form -->
+</div>
+
+<script src="/js/axios.js"></script>
+<script src="/js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            username: "ggg",
+            password: "",
+            repeatedPassword: ""
+        },
+        mounted: function () {
+            console.log(this.username)
+        },
+        methods: {
+            checkIfExist: function () {
+                console.log(this.username);
+                axios.get("/user/exist?username=" + this.username)
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>
