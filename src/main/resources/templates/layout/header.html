@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
     <head>
         <link rel="stylesheet" type="text/css" href="../../static/css/header.css" th:href="@{/css/header.css}">
     </head>
@@ -18,7 +21,16 @@
                         <li><a href="#">Top roku</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/auth/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a></li>
+                        <li sec:authorize="isAuthenticated()">
+
+                            <a href="/logout">
+                                <span style="margin-right: 1rem;" sec:authentication="name"></span>
+                                <span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a>
+                        </li>
+
+                        <li sec:authorize="!isAuthenticated()">
+                            <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a>
+                        </li>
                     </ul>
                 </div>
             </div>
