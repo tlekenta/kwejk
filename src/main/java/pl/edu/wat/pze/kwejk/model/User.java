@@ -1,6 +1,5 @@
 package pl.edu.wat.pze.kwejk.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
