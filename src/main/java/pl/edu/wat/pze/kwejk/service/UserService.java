@@ -26,4 +26,8 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         return user != null;
     }
+
+    public User create(User user) {
+        return userRepository.save(user);
+    }
 }

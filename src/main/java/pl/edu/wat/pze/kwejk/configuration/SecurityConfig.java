@@ -55,18 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
-                    System.out.println("POPRAWNIE ZALOGOWANO");
-                })
-                .failureHandler((httpServletRequest, httpServletResponse, e) -> {
-                    System.out.println("NIE ZALOGOWANO");
-                })
-                .defaultSuccessUrl("/?t=poprawnie-zalogowano")
-                .failureUrl("/login?t=zle-dane")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?fail=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/?t=poprawnie-wylogowano")
+                .logoutSuccessUrl("/")
                 .permitAll()
                 .and()
                 .csrf().disable();

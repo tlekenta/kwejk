@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
-      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <style>
     .form-signin {
@@ -32,30 +31,83 @@
         z-index: 2;
     }
 
+    .label-error:before {
+        content: "\200b";
+    }
+
+    .label-error {
+        color: #ff7d5a;
+        font-size: 14px !important;
+    }
+
+    .loader {
+        border: 6px solid #282b30;
+        border-radius: 50%;
+        border-top: 6px solid #3498db;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin .6s linear infinite; /* Safari */
+        animation: spin .6s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .overflow .loader {
+        margin: auto;
+    }
+
+    .disabled-form {
+        pointer-events: none;
+    }
+
 </style>
-<div id="app" class="text-center" style="padding:50px 0">
-    <form class="form-signin" action="/login" method="post">
-        <h2 class="form-signin-heading">Zarejestruj się</h2>
+<div id="app" style="padding:50px 0">
+    <form ref="form" class="form-signin" :class="{ 'disabled-form': form.submiting}" action="/register" method="post">
+        <h2 class="form-signin-heading text-center">Zarejestruj się</h2>
 
         <label for="inputEmail" class="text-left btn-block">Identyfikator</label>
-        <input type="text" name="username" v-model="username" v-on:input="checkIfExist" id="inputEmail"
+        <input type="text" name="username" v-model="form.data.username.value" id="inputEmail"
                class="form-control" placeholder="Identyfikator" required autofocus>
+        <label class="label-error" v-text="form.data.username.error"></label>
 
-        <p></p>
         <label for="inputPassword" class="text-left btn-block">Hasło</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+        <input type="password" name="password" v-model="form.data.password.value" id="inputPassword"
+               class="form-control" placeholder="Hasło" required>
+        <label class="label-error" v-text="form.data.password.error"></label>
 
-        <p></p>
         <label for="inputPasswordRepeat" class="text-left btn-block">Powtórz Hasło</label>
-        <input type="password" name="password" id="inputPasswordRepeat" class="form-control" placeholder="Powtórz Hasło"
-               required>
+        <input type="password" id="inputPasswordRepeat" v-model="form.data.repeatedPassword.value" class="form-control"
+               placeholder="Powtórz Hasło" required>
+        <label class="label-error" v-text="form.data.repeatedPassword.error"></label>
 
         <div class="checkbox text-left">
         </div>
 
-        <button class="btn btn-lg btn-primary btn-sm btn-block" type="submit">Zarejestruj się</button>
+        <button @click="submit" class="btn btn-lg btn-primary btn-sm btn-block"
+                type="submit">Zarejestruj się
+        </button>
     </form>
-    <!-- end:Main Form -->
+
+    <div class="overflow" v-if="form.submiting">
+        <div class="loader"></div>
+    </div>
 </div>
 
 <script src="/js/axios.js"></script>
@@ -64,19 +116,115 @@
     var app = new Vue({
         el: "#app",
         data: {
-            username: "ggg",
-            password: "",
-            repeatedPassword: ""
-        },
-        mounted: function () {
-            console.log(this.username)
+            form: {
+                valid: true,
+                submiting: false,
+
+                data: {
+                    username: {
+                        value: "",
+                        error: "",
+                        rules: [
+                            function (v) {
+                                return !!v || 'To pole nie może być puste';
+                            }
+                        ]
+                    },
+                    password: {
+                        value: "",
+                        error: "",
+                        rules: [
+                            function (v) {
+                                return !!v || 'To pole nie może być puste';
+                            },
+                            function (v) {
+                                return (v && v.length >= 6) || 'To pole nie może być krótsze niż 6 znaków';
+                            }
+                        ]
+                    },
+                    repeatedPassword: {
+                        value: "",
+                        error: "",
+                        rules: [
+                            function (v) {
+                                return !!v || 'To pole nie może być puste';
+
+                            },
+                            function (v, self) {
+                                return (v === self.form.data.password.value) || 'Hasła nie są zgodne';
+                            }
+                        ]
+                    }
+                }
+            }
         },
         methods: {
-            checkIfExist: function () {
-                console.log(this.username);
-                axios.get("/user/exist?username=" + this.username)
-            }
+            checkRules: function (field) {
 
+                var value = field.value;
+                var rules = field.rules;
+
+                for (var rule in rules) {
+                    if (rules.hasOwnProperty(rule)) {
+                        var result = rules[rule](value, this);
+                        if (typeof(result) !== "boolean") {
+                            field.error = result;
+                            this.form.valid = false;
+                        }
+                        else {
+                            field.error = "";
+
+                        }
+                    }
+                }
+            },
+
+            submit: function (event) {
+                this.form.submiting = true;
+                event.preventDefault();
+
+                this.form.valid = true;
+
+                this.checkRules(this.form.data.username);
+                this.checkRules(this.form.data.password);
+                this.checkRules(this.form.data.repeatedPassword);
+
+                if (!this.form.valid) {
+                    this.form.submiting = false;
+                    return;
+                }
+
+                this.checkIfExist();
+
+            },
+            checkIfExist: function () {
+                var self = this;
+                axios.get("/user/exist?username=" + this.form.data.username.value)
+                    .then(function (response) {
+                        var exist = response.data.exist;
+
+                        if (exist) {
+                            self.form.data.username.error = "Użytkownik o takiej nazwie istnieje";
+                            self.form.submiting = false;
+                        }
+                        else {
+                            self.register();
+                        }
+                    });
+            },
+            register: function () {
+                var self = this;
+
+                axios.post("/register", {
+                    "username": self.form.data.username.value,
+                    "password": self.form.data.password.value
+                }).then(function (value) {
+                    self.form.submiting = false;
+                    window.location.href = "/login"
+                }).catch(function (reason) {
+                    self.form.submiting = false;
+                })
+            }
         }
     })
 </script>

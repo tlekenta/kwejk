@@ -1,6 +1,7 @@
 package pl.edu.wat.pze.kwejk.auth;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.edu.wat.pze.kwejk.model.User;
 
@@ -18,8 +19,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add((GrantedAuthority) () -> "ADMIN");
-        grantedAuthorities.add((GrantedAuthority) () -> "USER");
+        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
         return grantedAuthorities;
     }
 
