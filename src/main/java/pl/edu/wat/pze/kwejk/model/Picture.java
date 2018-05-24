@@ -26,4 +26,6 @@ public class Picture {
     @Column(columnDefinition = "text")
     private String article;
 
+    //jeszcze trzeba date dodania dodać (do sortowania w TOPach się przyda m.in.)
+
 }

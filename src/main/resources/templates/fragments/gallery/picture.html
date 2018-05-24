@@ -2,28 +2,29 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 
 <body ng-app="pictureApp" ng-controller="pointsCtrl">
 <a th:href="@{'/view/' + ${aPicture.id}}">
     <h2 th:text="${aPicture.title}"></h2>
     <h3 th:text="${aPicture.description}"></h3>
-    <h3 >{{points}}</h3>
-    <img th:src="@{img/} + ${aPicture.path}"/>
+    <h3 >{{test}}</h3>
+    <img th:src="@{/img/} + ${aPicture.path}"/>
 </a>
-
+<br/><br/><br/>
 <div>
     <button class="btn btn-info" ng-click="pointClick('plus')">Dobre</button>
     <button class="btn btn-info" ng-click="pointClick('minus')">Słabe</button>
 </div>
 
-<!--Nie widzi angularowych tagów {{}} i nie działa {{points}} narazie, muszę w pomie pogrzebać-->
+<!-- NI MOM POJECIO CZEMU TO NIE DZIALA. KURWA, W PROJEKCIE OBOK DZIALA-->
 
 <script th:inline="javascript">
     /*<![CDATA[*/
     var app = angular.module('pictureApp', []);
     app.controller('pointsCtrl', function ($scope, $http) {
+        $scope.test = "test";
         $scope.project = {
             picId: /*[[${aPicture.id}]]*/ null
         };

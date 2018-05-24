@@ -8,4 +8,5 @@ public enum ViewEnum {
     VIEW,
     LOGIN,
     REGISTER,
+    UPLOAD,
 }
