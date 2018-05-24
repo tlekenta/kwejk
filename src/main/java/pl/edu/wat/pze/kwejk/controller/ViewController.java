@@ -22,7 +22,7 @@ public class ArticleController {
     @GetMapping("/{aArticleId}")
     public String getArticle(@PathVariable Long aArticleId, Model aModel) {
 
-        aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.ARTICLE);
+        aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.VIEW);
         aModel.addAttribute(ModelAttributeEnum.ACTUAL_ARTICLE.toString(), articleService.getArticle(aArticleId));
 
         return "index";
