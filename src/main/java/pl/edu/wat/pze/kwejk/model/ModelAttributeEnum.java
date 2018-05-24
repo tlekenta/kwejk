@@ -15,7 +15,7 @@ public enum ModelAttributeEnum {
     /*GALLERY*/
     PICTURES_LIST("picturesList"),
 
-    /*ARTICLE*/
+    /*VIEW*/
     ACTUAL_ARTICLE("actualArticle"),
 
     /*PICTURE*/

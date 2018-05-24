@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-    <body>
-        <a th:if="${aPicture.article} != null" th:href="@{'/article/' + ${picture.article.id}}">
-            <h2 th:text="${aPicture.title}"></h2>
-            <h3 th:text="${aPicture.description}"></h3>
-            <img th:src="@{img/} + ${aPicture.path}"/>
-        </a>
-        <a th:if="${aPicture.article} == null">
-            <h2 th:text="${aPicture.title}"></h2>
-            <h3 th:text="${aPicture.description}"></h3>
-            <img th:src="@{img/} + ${aPicture.path}"/>
-        </a>
-    </body>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="pictureApp" ng-controller="pointsCtrl">
+<a th:href="@{'/view/' + ${aPicture.id}}">
+    <h2 th:text="${aPicture.title}"></h2>
+    <h3 th:text="${aPicture.description}"></h3>
+    <h3 >{{points}}</h3>
+    <img th:src="@{img/} + ${aPicture.path}"/>
+</a>
+
+<div>
+    <button class="btn btn-info" ng-click="pointClick('plus')">Dobre</button>
+    <button class="btn btn-info" ng-click="pointClick('minus')">Słabe</button>
+</div>
+
+<!--Nie widzi angularowych tagów {{}} i nie działa {{points}} narazie, muszę w pomie pogrzebać-->
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var app = angular.module('pictureApp', []);
+    app.controller('pointsCtrl', function ($scope, $http) {
+        $scope.project = {
+            picId: /*[[${aPicture.id}]]*/ null
+        };
+        $http.get('/api/picture/' + project.picId).then(function (response) {
+            $scope.points=response.data;
+        }, function (response) {
+            console.log(response);
+        });
+        $scope.pointClick = function (action) {
+            $http.post('/api/picture/points/' + $scope.project.picId + '?action=' + action).then(function (response) {
+                $scope.points = response.data;
+            }, function (response) {
+                $log.error($location.absUrl() + ": Post error - " + action + " action");
+            })
+        };
+    })
+    /*]]>*/
+</script>
+</body>
+
+
 </html>

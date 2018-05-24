@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/gallery.css" th:href="@{/css/gallery.css}">
 </head>
 <body>
-$END$
+
+<div class="gallery-item">
+    <div
+            th:include="fragments/gallery/picture"
+            th:with="aPicture=${actualPicture}">
+    </div>
+
+    <div th:if="${actualPicture.article} != ''">
+        <p th:text="${actualPicture.article}"></p>
+    </div>
+</div>
+
 </body>
 </html>

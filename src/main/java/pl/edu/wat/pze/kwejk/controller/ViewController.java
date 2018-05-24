@@ -11,11 +11,11 @@ import pl.edu.wat.pze.kwejk.service.ArticleService;
 
 @Controller
 @RequestMapping("/article")
-public class ArticleController {
+public class ViewController {
 
     private ArticleService articleService;
 
-    public ArticleController(ArticleService articleService) {
+    public ViewController(ArticleService articleService) {
         this.articleService = articleService;
     }
 
