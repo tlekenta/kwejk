@@ -12,4 +12,9 @@
             <li><a th:href="@{${lastPageNumber}}">&gt;&gt;</a></li>
         </ul>
     </body>
+    <script>
+        $('.pagination li.disabled a').on('click', function (e) {
+            e.preventDefault();
+        });
+    </script>
 </html>
