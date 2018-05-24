@@ -33,7 +33,7 @@ public class GalleryController {
             aPageNumber = 1;
         aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.GALLERY);
         aModel.addAttribute(ModelAttributeEnum.ACTUAL_PAGE_NUMBER.toString(), aPageNumber);
-        aModel.addAttribute(ModelAttributeEnum.LAST_PAGE_NUMBER.toString(), PaginationService.MAX_PAGE);
+        aModel.addAttribute(ModelAttributeEnum.LAST_PAGE_NUMBER.toString(), pictureService.getMaxPage());
         aModel.addAttribute(ModelAttributeEnum.PICTURES_LIST.toString(), pictureService.getPicturesForPage(aPageNumber));
         aModel.addAttribute(ModelAttributeEnum.PAGES_NUMBERS_LIST.toString(), paginationService.getPagesList(aPageNumber));
         return "index.html";
