@@ -1,8 +1,5 @@
 package pl.edu.wat.pze.kwejk.controller;
 
-/**
- * Created by kuba on 22.04.18.
- */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.wat.pze.kwejk.model.Picture;
@@ -12,8 +9,12 @@ import pl.edu.wat.pze.kwejk.service.PictureService;
 @RequestMapping("/api/picture")
 public class PointsController {
 
+    private final PictureService pictureService;
+
     @Autowired
-    private PictureService pictureService;
+    public PointsController(PictureService pictureService) {
+        this.pictureService = pictureService;
+    }
 
     @GetMapping("/points/{pictureId}")
     public int getPoints(@PathVariable Long pictureId) {

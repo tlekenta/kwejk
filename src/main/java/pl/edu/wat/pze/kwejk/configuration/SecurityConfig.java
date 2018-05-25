@@ -15,8 +15,12 @@ import pl.edu.wat.pze.kwejk.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userDetailsService;
+
     @Autowired
-    UserService userDetailsService;
+    public SecurityConfig(UserService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

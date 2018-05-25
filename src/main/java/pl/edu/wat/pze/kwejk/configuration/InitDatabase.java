@@ -1,6 +1,7 @@
 package pl.edu.wat.pze.kwejk.configuration;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -8,12 +9,17 @@ import pl.edu.wat.pze.kwejk.model.Picture;
 import pl.edu.wat.pze.kwejk.repository.PictureRepository;
 
 import java.util.Arrays;
+import java.util.Date;
 
 @Component
-@AllArgsConstructor
 public class InitDatabase {
 
-    PictureRepository pictureRepository;
+    private final PictureRepository pictureRepository;
+
+    @Autowired
+    public InitDatabase(PictureRepository pictureRepository) {
+        this.pictureRepository = pictureRepository;
+    }
 
     @EventListener(ContextRefreshedEvent.class)
     public void initDb() {
@@ -25,10 +31,10 @@ public class InitDatabase {
     private Picture[] createPictures() {
 
         return new Picture[]{
-                new Picture((long) 1, "1.jpg", "Obrazek pierwszy", "Opis obrazka pierwszego", 1,  "oo jaki dlugi" +
+                new Picture((long) 1, "1.jpg", "Obrazek pierwszy", "Opis obrazka pierwszego", 1, new Date(), "oo jaki dlugi" +
                         " artykul, noniemoge"),
-                new Picture((long) 2, "plakat.png", "Obrazek drugi", "Opis obrazka drugiego", 2, null),
-                new Picture((long) 3, "spd1.jpg", "Obrazek trzeci", "Opis obrazka trzeciego", 3,  "Jest to jedna z najaktywniejszych substancji psychodelicznych o właściwościach halucynogennych – 100 razy bardziej czynna biologicznie niż psylocybina i 4000 razy bardziej niż meskalina. Po raz pierwszy LSD zostało zsyntetyzowane w 1938 r. przez szwajcarskiego chemika Alberta Hofmanna w laboratoriach firmy Sandoz (obecnie Novartis). Początkowo planowano wykorzystać tę substancję jako lek działający pobudzająco na układ krwionośny i oddechowy. W trakcie dalszych badań poznano jego psychodeliczne właściwości. Lek był w latach 40. i 50. XX wieku stosowany w psychiatrii. W latach 60. i 70. XX w. jako narkotyk LSD uzyskało popularność w pewnych kręgach młodzieży szczególnie związanych z ruchem hipisowskim.\n" +
+                new Picture((long) 2, "plakat.png", "Obrazek drugi", "Opis obrazka drugiego", 2, new Date(), null),
+                new Picture((long) 3, "spd1.jpg", "Obrazek trzeci", "Opis obrazka trzeciego", 3, new Date(), "Jest to jedna z najaktywniejszych substancji psychodelicznych o właściwościach halucynogennych – 100 razy bardziej czynna biologicznie niż psylocybina i 4000 razy bardziej niż meskalina. Po raz pierwszy LSD zostało zsyntetyzowane w 1938 r. przez szwajcarskiego chemika Alberta Hofmanna w laboratoriach firmy Sandoz (obecnie Novartis). Początkowo planowano wykorzystać tę substancję jako lek działający pobudzająco na układ krwionośny i oddechowy. W trakcie dalszych badań poznano jego psychodeliczne właściwości. Lek był w latach 40. i 50. XX wieku stosowany w psychiatrii. W latach 60. i 70. XX w. jako narkotyk LSD uzyskało popularność w pewnych kręgach młodzieży szczególnie związanych z ruchem hipisowskim.\n" +
                         "\n" +
                         "LSD weszło w krąg zainteresowań CIA, która rozpoczęła w latach 50. XX w. eksperymenty z jej wywiadowczym i militarnym zastosowaniem. Projekt ten znany jest pod kryptonimem MKULTRA.\n" +
                         "\n" +
@@ -81,7 +87,7 @@ public class InitDatabase {
                         "W 2001 roku policja w Stanach Zjednoczonych odkryła laboratorium produkujące LSD w silosie po rakietach atomowych. Znaleziono w nim 40,1 kg LSD, czyli około 401 milionów dawek po 100 µg. Alexander Shulgin prowadził również badania nad LSD i efekty swoich badań opisał razem z żoną Ann Shulgin w książce TiHKAL (opisuje metody syntezy i działanie wielu tryptamin, w tym LSD).\n" +
                         "\n" +
                         "Innym badaczem wpływu LSD na umysł jest psychiatra Stanislav Grof. Efekty badań opisał w swoich książkach, z których w Polsce wydano „Przygoda odkrywania samego siebie”, „Poza mózg – narodziny, śmierć i transcendencja” oraz „Obszary nieświadomości. Raport z badań nad LSD”."),
-                new Picture((long) 4, "testo.jpg", "Obrazek czwarty", "Opis obrazka czwartego", 4,  "Prohibicja w Stanach Zjednoczonych, znana także jako The Noble Experiment („Szlachetny Eksperyment”) trwała od 1919 do 1933 roku. W okresie tym sprzedaż, produkcja oraz transport alkoholu były zakazane na terenie całego kraju[1]. Prohibicję wprowadzała 18. poprawka do Konstytucji Stanów Zjednoczonych\n" +
+                new Picture((long) 4, "testo.jpg", "Obrazek czwarty", "Opis obrazka czwartego", 4, new Date(), "Prohibicja w Stanach Zjednoczonych, znana także jako The Noble Experiment („Szlachetny Eksperyment”) trwała od 1919 do 1933 roku. W okresie tym sprzedaż, produkcja oraz transport alkoholu były zakazane na terenie całego kraju[1]. Prohibicję wprowadzała 18. poprawka do Konstytucji Stanów Zjednoczonych\n" +
                         "\n" +
                         "Senat Stanów Zjednoczonych zaproponował tę poprawkę 18 grudnia 1917; poparta przez 36 Stanów, została ratyfikowana 16 stycznia 1919, natomiast wprowadzona w życie została 17 stycznia 1920 roku[2]. Niektóre stany wprowadziły prohibicję zanim 18. poprawka została ratyfikowana.\n" +
                         "\n" +
@@ -91,7 +97,7 @@ public class InitDatabase {
                         "\n" +
                         "W dniu 22 marca 1933 roku prezydent Franklin Roosevelt podpisał poprawkę do ustawy Volsteada, zwaną „Cullen-Harrison”, pozwalającą na produkcję i sprzedaż niektórych rodzajów napojów alkoholowych. 5 grudnia 1933 ratyfikowano 21. poprawkę do Konstytucji Stanów Zjednoczonych, która znosiła poprawkę 18. wprowadzającą prohibicję. Tym niemniej, prawo federalne Stanów Zjednoczonych nadal zakazuje produkcji wyrobów spirytusowych bez spełnienia licznych wymogów licencyjnych, które powodują, że legalna produkcja napojów spirytusowych na własny użytek jest ciągle niepraktyczna[6]. " +
                         "zyciu"),
-                new Picture((long) 5, "testo2.jpg", "Obrazek piąty", "Opis obrazka piątego", 42,
+                new Picture((long) 5, "testo2.jpg", "Obrazek piąty", "Opis obrazka piątego", 42, new Date(),
                         "putinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputinputin ")
         };
     }

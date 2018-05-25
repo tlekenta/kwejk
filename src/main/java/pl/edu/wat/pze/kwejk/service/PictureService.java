@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.wat.pze.kwejk.model.Picture;
 import pl.edu.wat.pze.kwejk.repository.PictureRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +16,6 @@ import java.util.stream.Collectors;
 public class PictureService {
 
     PictureRepository pictureRepository;
-
-
-    public List<Picture> getPicturesForPage(int aPageNumber) {
-        return pictureRepository.findAll();
 
     public int getMaxPage() {
         return (int) Math.ceil( 1.0 * pictureRepository.count() / PaginationService.NUMBER_OF_PICS_ON_PAGE);
@@ -42,5 +39,7 @@ public class PictureService {
     public void save(Picture picture) {
         pictureRepository.save(picture);
     }
+
+
 
 }

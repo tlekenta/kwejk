@@ -1,5 +1,6 @@
 package pl.edu.wat.pze.kwejk.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,10 @@ import pl.edu.wat.pze.kwejk.service.PictureService;
 @Controller
 public class GalleryController {
 
-    private PictureService pictureService;
-    private PaginationService paginationService;
+    private final PictureService pictureService;
+    private final PaginationService paginationService;
 
+    @Autowired
     public GalleryController(PictureService pictureService, PaginationService paginationService) {
         this.pictureService = pictureService;
         this.paginationService = paginationService;
@@ -28,7 +30,7 @@ public class GalleryController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
-        if(aPageNumber == null)
+        if (aPageNumber == null)
             aPageNumber = 1;
 
         aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.GALLERY);

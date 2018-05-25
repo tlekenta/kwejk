@@ -15,8 +15,12 @@ import pl.edu.wat.pze.kwejk.service.UserService;
 @Controller
 public class AuthController {
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/login")
     public String loginView(Model aModel, @RequestParam(value = "fail", required = false, defaultValue = "false") Boolean fail) {

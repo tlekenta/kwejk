@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Dodaj coś fajnego</title>
 </head>
 <body>
-<!--do zrobienia-->
+
+<form method="POST" th:action="@{/upload}" action="/upload" th:object="${picture}"
+      enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" name="file"/>
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Tytuł" th:field="*{title}"/>
+    </div>
+    <div class="form-group">
+            <textarea class="form-control" rows="3" type="text" th:placeholder="#{description}"
+                      th:field="*{description}"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" th:text="#{add}" >Dodaj</button>
+</form>
+
 </body>
 </html>
