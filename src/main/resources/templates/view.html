@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/gallery.css" th:href="@{/css/gallery.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/article.css" th:href="@{/css/article.css}">
+</head>
+<body>
+
+<div class="gallery-item">
+    <div
+            th:include="fragments/gallery/picture"
+            th:with="aPicture=${actualPicture}">
+    </div>
+<br/><br/>
+    <div class="article-item" th:if="${actualPicture.article} != null">
+        <p th:text="${actualPicture.article}"></p>
+    </div>
+</div>
+
+</body>
+</html>

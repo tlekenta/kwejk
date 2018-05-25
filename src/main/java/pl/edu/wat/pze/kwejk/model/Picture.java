@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -24,7 +21,11 @@ public class Picture {
 
     private String description;
 
-    @OneToOne
-    private Article article;
+    private int points;
+
+    @Column(columnDefinition = "text")
+    private String article;
+
+    //jeszcze trzeba date dodania dodać (do sortowania w TOPach się przyda m.in.)
 
 }
