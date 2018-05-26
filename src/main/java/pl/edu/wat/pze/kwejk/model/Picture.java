@@ -26,19 +26,19 @@ public class Picture {
     private String path;
 
     @NotEmpty(message = "Tytuł nie może być pusty")
-    @Max(value = 50, message = "Tytuł może mieć maksymalnie 50 znaków")
+//    @Max(value = 50, message = "Tytuł może mieć maksymalnie 50 znaków")
     private String title;
 
-    @Max(value = 150, message = "Opis może mieć maksymalnie 150 znaków")
+//    @Max(value = 150, message = "Opis może mieć maksymalnie 150 znaków")
     private String description;
 
     private int points;
 
-    @DateTimeFormat
+//    @DateTimeFormat
     private Date date;
 
     @Column(columnDefinition = "text")
-    @Min(value = 100, message = "Artykuł musi miec conajmniej 100 znaków")
+//    @Min(value = 100, message = "Artykuł musi miec conajmniej 100 znaków")
     private String article;
 
 }
