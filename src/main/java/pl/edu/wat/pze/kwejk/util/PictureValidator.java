@@ -18,19 +18,20 @@ public class PictureValidator {
     private int MAX_SIZE = 10485760; //10Mb
     private int MAX_HEIGHT = 1200;
     private int MAX_WIDTH = 890;
-    private String TMP_PATH = "/resources/img/tmp/";
+    private String TMP_PATH = "src/main/resources/static/img/tmp/";
     private PicValidEnum result = PicValidEnum.OK;
 
     public PicValidEnum validateImageFile(MultipartFile file) {
 
-        if (checkType(file) && checkSize(file))
+        if (checkType(file) && checkSize(file)) {
             checkResolution(file);
+        } else System.out.println("Wrong type or file size");
 
         return result;
     }
 
     public boolean checkType(MultipartFile file) {
-        if(!file.getContentType().startsWith("image")) {
+        if (!file.getContentType().startsWith("image")) {
             result = PicValidEnum.INCORRECT_FILE_TYPE;
             return false;
         }
@@ -38,7 +39,7 @@ public class PictureValidator {
     }
 
     public boolean checkSize(MultipartFile file) {
-        if(file.getSize() > MAX_SIZE) {
+        if (file.getSize() > MAX_SIZE) {
             result = PicValidEnum.INCORRECT_WEIGHT;
             return false;
         }
@@ -50,8 +51,10 @@ public class PictureValidator {
         try {
             Files.write(tmp.toPath(), file.getBytes(), StandardOpenOption.CREATE_NEW);
             BufferedImage bimg = ImageIO.read(tmp);
-            if (bimg.getHeight() > MAX_HEIGHT || bimg.getWidth() > MAX_WIDTH)
+            if (bimg.getHeight() > MAX_HEIGHT || bimg.getWidth() > MAX_WIDTH) {
+                System.out.println("Wrong resolution");
                 result = PicValidEnum.INCORRECT_RESOLUTION;
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
             result = PicValidEnum.IOError;

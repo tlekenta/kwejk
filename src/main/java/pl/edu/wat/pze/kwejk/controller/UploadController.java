@@ -26,7 +26,7 @@ public class UploadController {
 
     private final PictureValidator pictureValidator;
     private final PictureService pictureService;
-    private final String PATH = "/resources/img/";
+    private final String PATH = "src/main/resources/static/img/";
 
     @Autowired
     public UploadController(PictureValidator pictureValidator, PictureService pictureService) {
@@ -39,6 +39,7 @@ public class UploadController {
                       @Valid @ModelAttribute("picture") Picture picture,
                       BindingResult bindingResult,
                       Model model) {
+        System.out.println(bindingResult.hasErrors());
 
         if (pictureValidator.validateImageFile(file) == PicValidEnum.OK && !bindingResult.hasErrors()) {
             picture = preparePicture(picture,file);
@@ -57,16 +58,20 @@ public class UploadController {
     }
 
     private Picture preparePicture(Picture picture, MultipartFile file) {
-        String imagePath = PATH + String.valueOf(picture.hashCode()) + file.getContentType();
+        String fileName = String.valueOf(picture.hashCode()) + file.getContentType().replace("/", ".");
+        String imagePath = PATH + fileName;
         File image = new File(imagePath);
+
         try {
             Files.write(image.toPath(), file.getBytes(), StandardOpenOption.CREATE);
+            System.out.println("image name:" + image.getName());
         } catch (IOException e) {
             e.getMessage();
         }
-        picture.setPath(imagePath);
+        picture.setPath(fileName);
         picture.setDate(new Date());
         picture.setPoints(0);
+        System.out.printf("picture:" + picture);
         return picture;
     }
 }

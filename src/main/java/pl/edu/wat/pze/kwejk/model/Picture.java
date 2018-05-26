@@ -34,7 +34,7 @@ public class Picture {
 
     private int points;
 
-//    @DateTimeFormat
+    @DateTimeFormat
     private Date date;
 
     @Column(columnDefinition = "text")
