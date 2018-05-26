@@ -17,8 +17,12 @@ import pl.edu.wat.pze.kwejk.service.PictureService;
 @RequestMapping("/view")
 public class ViewController {
 
+    private final PictureService pictureService;
+
     @Autowired
-    private PictureService pictureService;
+    public ViewController(PictureService pictureService) {
+        this.pictureService = pictureService;
+    }
 
     @GetMapping("/{pictureId}")
     public String getArticle(@PathVariable Long pictureId, Model aModel) {

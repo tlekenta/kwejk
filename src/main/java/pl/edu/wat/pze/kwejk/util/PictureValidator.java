@@ -1,5 +1,6 @@
 package pl.edu.wat.pze.kwejk.util;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import pl.edu.wat.pze.kwejk.model.PicValidEnum;
 
@@ -7,31 +8,60 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
-//import com.google.common.io.Files;
 
+@Component
 public class PictureValidator {
 
     private int MAX_SIZE = 10485760; //10Mb
     private int MAX_HEIGHT = 1200;
     private int MAX_WIDTH = 890;
+    private String TMP_PATH = "/resources/img/tmp/";
+    private PicValidEnum result = PicValidEnum.OK;
 
-    public PicValidEnum validateImage(MultipartFile image)  {
-        if (!image.getContentType().startsWith("image"))
-            return PicValidEnum.INCORRECT_FILE_TYPE;          // .jpg .png ..
+    public PicValidEnum validateImageFile(MultipartFile file) {
 
-        File tmp = new File("tmp");
-//        Files.write(image.getBytes(), tmp); // nie widzi importu guava - do zrobienia potem, ide spac
-        BufferedImage bimg = null;
-        try {
-            bimg = ImageIO.read(tmp);
-        } catch (IOException e) {
-            System.err.println("ImageIO.read error.\n" + e.getMessage());
+        if (checkType(file) && checkSize(file))
+            checkResolution(file);
+
+        return result;
+    }
+
+    public boolean checkType(MultipartFile file) {
+        if(!file.getContentType().startsWith("image")) {
+            result = PicValidEnum.INCORRECT_FILE_TYPE;
+            return false;
         }
-        if (image.getSize() > MAX_SIZE)
-            return PicValidEnum.INCORRECT_WEIGHT;
-        if (bimg.getHeight() > MAX_HEIGHT || bimg.getWidth() > MAX_WIDTH)
-            return PicValidEnum.INCORRECT_RESOLUTION;
-        return PicValidEnum.OK;
+        return true;
+    }
+
+    public boolean checkSize(MultipartFile file) {
+        if(file.getSize() > MAX_SIZE) {
+            result = PicValidEnum.INCORRECT_WEIGHT;
+            return false;
+        }
+        return true;
+    }
+
+    public void checkResolution(MultipartFile file) {
+        File tmp = new File(TMP_PATH + file.hashCode());
+        try {
+            Files.write(tmp.toPath(), file.getBytes(), StandardOpenOption.CREATE_NEW);
+            BufferedImage bimg = ImageIO.read(tmp);
+            if (bimg.getHeight() > MAX_HEIGHT || bimg.getWidth() > MAX_WIDTH)
+                result = PicValidEnum.INCORRECT_RESOLUTION;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            result = PicValidEnum.IOError;
+        } finally {
+            deleteTmpFile(tmp);
+        }
+
+    }
+
+    public void deleteTmpFile(File tmp) {
+        if (!tmp.delete()) System.err.println("Delete tmp file failed");
     }
 }
