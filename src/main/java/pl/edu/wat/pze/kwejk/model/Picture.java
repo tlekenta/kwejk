@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -26,10 +25,10 @@ public class Picture {
     private String path;
 
     @NotEmpty(message = "Tytuł nie może być pusty")
-//    @Max(value = 50, message = "Tytuł może mieć maksymalnie 50 znaków")
+    @Size(max = 50)
     private String title;
 
-//    @Max(value = 150, message = "Opis może mieć maksymalnie 150 znaków")
+    @Size(max = 150)
     private String description;
 
     private int points;
@@ -38,7 +37,7 @@ public class Picture {
     private Date date;
 
     @Column(columnDefinition = "text")
-//    @Min(value = 100, message = "Artykuł musi miec conajmniej 100 znaków")
+//    @Size(min = 100, max = 9000)
     private String article;
 
 }

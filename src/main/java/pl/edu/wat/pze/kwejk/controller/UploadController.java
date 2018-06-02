@@ -39,15 +39,35 @@ public class UploadController {
                       @Valid @ModelAttribute("picture") Picture picture,
                       BindingResult bindingResult,
                       Model model) {
-        System.out.println(bindingResult.hasErrors());
-
-        if (pictureValidator.validateImageFile(file) == PicValidEnum.OK && !bindingResult.hasErrors()) {
-            picture = preparePicture(picture,file);
+        model.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.UPLOAD);
+        if (bindingResult.hasErrors())
+            return "index";
+        PicValidEnum validateResult = pictureValidator.validateImageFile(file);
+        if (validateResult == PicValidEnum.OK) {
+            picture = preparePicture(picture, file);
             pictureService.save(picture);
             model.addAttribute("uploadedImagePath", picture.getPath());
         }
-        model.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.UPLOAD);
+        model.addAttribute("resultMessage", getResultMessage(validateResult));
+
         return "index";
+    }
+
+    private String getResultMessage(PicValidEnum validateResult) {
+        switch (validateResult) {
+            case INCORRECT_FILE_TYPE:
+                return "Niepoprawny plik. Obłsugiwane typy plików to .jpg .png .gif";
+            case INCORRECT_WEIGHT:
+                return "Plik waży za dużo, opanuj się";
+            case INCORRECT_RESOLUTION:
+                return "Za duży ten obrazek, opanuj się";
+            case IOError:
+                return "Coś się zepsuło, spróbuj jeszcze raz";
+            case OK:
+                return "Plik poprawnie dodany";
+            default:
+                return "";
+        }
     }
 
     @GetMapping("")
