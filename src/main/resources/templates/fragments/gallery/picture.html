@@ -20,27 +20,29 @@
 </a>
 <br/><br/><br/>
 <div>
-    <div class="picture-points">{{test}}</div>
+    <div class="picture-points">{{points}}</div>
     <button class="btn btn-info" ng-click="pointClick('plus')">Dobre</button>
     <button class="btn btn-info" ng-click="pointClick('minus')">Słabe</button>
 </div>
-
-<!-- NI MOM POJECIO CZEMU TO NIE DZIALA. KURWA, W PROJEKCIE OBOK DZIALA-->
 
 <script th:inline="javascript">
     /*<![CDATA[*/
     var app = angular.module('pictureApp', []);
     app.controller('pointsCtrl', function ($scope, $http) {
-        $scope.test = "test";
+        $scope.action = '';
+        $scope.points = "";
         $scope.project = {
             picId: /*[[${aPicture.id}]]*/ null
         };
-        $http.get('/api/picture/' + project.picId).then(function (response) {
+        $http.get('/api/picture/points/' + $scope.project.picId).then(function (response) {
             $scope.points = response.data;
         }, function (response) {
             console.log(response);
         });
         $scope.pointClick = function (action) {
+            if($scope.action === action) return;
+            $scope.action = action;
+
             $http.post('/api/picture/points/' + $scope.project.picId + '?action=' + action).then(function (response) {
                 $scope.points = response.data;
             }, function (response) {
