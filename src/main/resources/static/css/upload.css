@@ -1,0 +1,21 @@
+.errorMessage {
+    color: rgba(131,4,0,0.69);
+    font-size: large;
+}
+
+.succeedMessage {
+    color: rgba(71,143,40,0.69);
+    font-size: x-large;
+    text-align: center;
+}
+
+.uploadContainer {
+    background: black;
+    margin: 2% 10%;
+    padding: 1% 5% 5% 5%;
+    color: whitesmoke;
+}
+
+.center {
+    text-align: center;
+}

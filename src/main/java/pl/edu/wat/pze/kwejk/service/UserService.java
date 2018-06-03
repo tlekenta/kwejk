@@ -30,4 +30,8 @@ public class UserService implements UserDetailsService {
     public User create(User user) {
         return userRepository.save(user);
     }
+
+    public User getOne(String userName) {
+        return userRepository.findByUsername(userName);
+    }
 }
