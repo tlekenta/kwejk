@@ -3,17 +3,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/view.css" th:href="@{/css/view.css}">
 </head>
 
 <body ng-app="pictureApp" ng-controller="pointsCtrl">
+
 <a th:href="@{'/view/' + ${aPicture.id}}">
-    <h2 th:text="${aPicture.title}"></h2>
-    <h3 th:text="${aPicture.description}"></h3>
-    <h3 >{{test}}</h3>
+    <div class="picture-title" th:text="${aPicture.title}"></div>
+</a>
+<div class="picture-date" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
+<div class="picture-date" th:text="${aPicture.user.username}"></div>
+<br/>
+<div class="picture-description" th:text="${aPicture.description}"></div>
+<a th:href="@{'/view/' + ${aPicture.id}}">
     <img th:src="@{/img/} + ${aPicture.path}"/>
 </a>
 <br/><br/><br/>
 <div>
+    <div class="picture-points">{{test}}</div>
     <button class="btn btn-info" ng-click="pointClick('plus')">Dobre</button>
     <button class="btn btn-info" ng-click="pointClick('minus')">Słabe</button>
 </div>
@@ -29,7 +36,7 @@
             picId: /*[[${aPicture.id}]]*/ null
         };
         $http.get('/api/picture/' + project.picId).then(function (response) {
-            $scope.points=response.data;
+            $scope.points = response.data;
         }, function (response) {
             console.log(response);
         });

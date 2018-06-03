@@ -1,29 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Dodaj coś fajnego</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/upload.css" th:href="@{/css/upload.css}">
 </head>
 <body>
-
-<form method="POST" th:action="@{/upload}" action="/upload" th:object="${picture}"
-      enctype="multipart/form-data">
-    <div class="form-group">
-        <input type="file" name="file"/>
-    </div>
-    <div class="form-group">
-        <input type="text" placeholder="Tytuł" th:field="*{title}"/>
-        <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</td>
-    </div>
-    <div class="form-group">
-            <textarea class="form-control" rows="3" type="text" th:placeholder="Opis"
-                      th:field="*{description}"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary" th:text="Dodaj">Dodaj</button>
-</form>
-
-<p class="resultMessage" th:text="${resultMessage} != null ? ${resultMessage}"></p>
+<div sec:authorize="isAuthenticated()" th:include="fragments/upload/logged"></div>
+<div sec:authorize="!isAuthenticated()" th:include="fragments/upload/unlogged"></div>
 <!-- switch na artykul - do zrobienia -->
+<!--<div inp type="" contentEditable="true">asdasda <img-->
+<!--src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1"/>-->
+<!--</div>-->
 </body>
 </html>
 

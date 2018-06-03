@@ -18,11 +18,11 @@ public class PictureValidator {
     private int MAX_SIZE = 10485760; //10Mb
     private int MAX_HEIGHT = 1200;
     private int MAX_WIDTH = 890;
-    private String TMP_PATH = "src/main/resources/static/img/tmp/";
     private PicValidEnum result = PicValidEnum.OK;
 
     public PicValidEnum validateImageFile(MultipartFile file) {
 
+        result=PicValidEnum.OK;
         if (checkType(file) && checkSize(file)) {
             checkResolution(file);
         } else System.out.println("Wrong type or file size");
@@ -47,7 +47,7 @@ public class PictureValidator {
     }
 
     public void checkResolution(MultipartFile file) {
-        File tmp = new File(TMP_PATH + file.hashCode());
+        File tmp = new File(String.valueOf(file.hashCode()));
         try {
             Files.write(tmp.toPath(), file.getBytes(), StandardOpenOption.CREATE_NEW);
             BufferedImage bimg = ImageIO.read(tmp);

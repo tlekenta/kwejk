@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+@Table(name = "PICTURE")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,15 +21,16 @@ public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PICTURE_ID")
     private Long id;
 
     private String path;
 
     @NotEmpty(message = "Tytuł nie może być pusty")
-    @Size(max = 50)
+    @Size(max = 30, message = "Tytuł może miec maksymalnie 30 znaków")
     private String title;
 
-    @Size(max = 150)
+    @Size(max = 150, message = "Opis może mieć maksymalnie 150 znaków")
     private String description;
 
     private int points;
@@ -36,8 +38,25 @@ public class Picture {
     @DateTimeFormat
     private Date date;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
+
     @Column(columnDefinition = "text")
 //    @Size(min = 100, max = 9000)
     private String article;
 
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "id=" + id +
+                ", path='" + path + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", points=" + points +
+                ", date=" + date +
+                ", user=" + user +
+                ", article='" + article + '\'' +
+                '}';
+    }
 }
