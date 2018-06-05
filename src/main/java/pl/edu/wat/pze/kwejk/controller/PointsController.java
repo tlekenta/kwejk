@@ -21,21 +21,36 @@ public class PointsController {
         return pictureService.getPictureById(pictureId).getPoints();
     }
 
-    @PostMapping("/points/{pictureId}")
-    public int setPoints(@PathVariable Long pictureId,
-                         @RequestParam(value = "action", defaultValue = "plus") String action) {
-        Picture pic = pictureService.getPictureById(pictureId);
-        switch (action) {
+    @PostMapping("/points")
+    public int setPoints(@RequestParam(value = "action") String action) {
+        String[] pAttributes = action.split("_");
+        Long pPictureId = new Long(pAttributes[1]);
+        Picture pPicture = pictureService.getPictureById(pPictureId);
+        switch(pAttributes[0]) {
             case "plus":
-                pic.setPoints(pic.getPoints() + 1);
+                pPicture.setPoints(pPicture.getPoints() + 1);
                 break;
             case "minus":
-                pic.setPoints(pic.getPoints() - 1);
+                pPicture.setPoints(pPicture.getPoints() - 1);
                 break;
-            default:
-                //System.err.println("zły argument");
         }
-        pictureService.save(pic);
-        return pictureService.getPictureById(pictureId).getPoints();
+
+        pictureService.save(pPicture);
+
+        return pPicture.getPoints();
+
+//        Picture pic = pictureService.getPictureById(pictureId);
+//        switch (action) {
+//            case "plus":
+//                pic.setPoints(pic.getPoints() + 1);
+//                break;
+//            case "minus":
+//                pic.setPoints(pic.getPoints() - 1);
+//                break;
+//            default:
+//                //System.err.println("zły argument");
+//        }
+//        pictureService.save(pic);
+//        return pictureService.getPictureById(pictureId).getPoints();
     }
 }

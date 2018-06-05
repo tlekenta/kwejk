@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../static/css/view.css" th:href="@{/css/view.css}">
 </head>
 
@@ -21,7 +20,7 @@
     </a>
     <br/><br/><br/>
     <div th:include="fragments/common/voting-buttons"
-         th:with="aPicture=${picture}"
+         th:with="aPicture=${aPicture}"
          th:remove="tag">
     </div>
 

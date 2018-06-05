@@ -5,4 +5,5 @@
 
 .picture-points:hover {
     color: navajowhite;
+    cursor: default;
 }

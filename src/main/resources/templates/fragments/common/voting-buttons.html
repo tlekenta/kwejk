@@ -7,43 +7,15 @@
         <link rel="stylesheet" type="text/css" href="../../../static/css/voting-buttons.css" th:href="@{/css/voting-buttons.css}">
     </head>
 
-    <body ng-app="pictureApp" ng-controller="pointsCtrl">
+    <body>
         <div class="btn-group" role="group">
-            <button sec:authorize="isAuthenticated()" class="btn btn-success" ng-click="pointClick('plus')">
+            <button sec:authorize="isAuthenticated()" class="btn btn-success vote-button" th:id="'plus_' + ${aPicture.id}">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
-            <button class="btn picture-points">{{points}}</button>
-            <button sec:authorize="isAuthenticated()" class="btn btn-danger" ng-click="pointClick('minus')">
+            <button class="btn picture-points" th:id="'picture_' + ${aPicture.id}" th:text="${aPicture.points}"></button>
+            <button sec:authorize="isAuthenticated()" class="btn btn-danger vote-button" th:id="'minus_' + ${aPicture.id}">
                 <span class="glyphicon glyphicon-minus"></span>
             </button>
         </div>
-
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            var app = angular.module('pictureApp', []);
-            app.controller('pointsCtrl', function ($scope, $http) {
-                $scope.action = '';
-                $scope.points = "";
-                $scope.project = {
-                    picId: /*[[${aPicture.id}]]*/ null
-                };
-                $http.get('/api/picture/points/' + $scope.project.picId).then(function (response) {
-                    $scope.points = response.data;
-                }, function (response) {
-                    console.log(response);
-                });
-                $scope.pointClick = function (action) {
-                    if($scope.action === action) return;
-                    $scope.action = action;
-
-                    $http.post('/api/picture/points/' + $scope.project.picId + '?action=' + action).then(function (response) {
-                        $scope.points = response.data;
-                    }, function (response) {
-                        $log.error($location.absUrl() + ": Post error - " + action + " action");
-                    })
-                };
-            })
-            /*]]>*/
-        </script>
     </body>
 </html>
