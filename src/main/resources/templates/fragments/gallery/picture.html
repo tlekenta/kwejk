@@ -1,62 +1,30 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../static/css/view.css" th:href="@{/css/view.css}">
 </head>
 
-<body ng-app="pictureApp" ng-controller="pointsCtrl">
+<body>
 
-<a th:href="@{'/view/' + ${aPicture.id}}">
-    <div class="picture-title" th:text="${aPicture.title}"></div>
-</a>
-<div class="picture-date" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
-<div class="picture-date" th:text="${aPicture.user.username}"></div>
-<br/>
-<div class="picture-description" th:text="${aPicture.description}"></div>
-<a th:href="@{'/view/' + ${aPicture.id}}">
-    <img th:src="@{/img/} + ${aPicture.path}"/>
-</a>
-<br/><br/><br/>
-<div>
-    <div class="picture-points">{{points}}</div>
-
-    <div sec:authorize="isAuthenticated()">
-        <button class="btn btn-info" ng-click="pointClick('plus')">Dobre</button>
-        <button class="btn btn-info" ng-click="pointClick('minus')">Słabe</button>
+    <a th:href="@{'/view/' + ${aPicture.id}}">
+        <div class="picture-title" th:text="${aPicture.title}"></div>
+    </a>
+    <div class="picture-date" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
+    <div class="picture-date" th:text="${aPicture.user.username}"></div>
+    <br/>
+    <div class="picture-description" th:text="${aPicture.description}"></div>
+    <a th:href="@{'/view/' + ${aPicture.id}}">
+        <img th:src="@{/img/} + ${aPicture.path}"/>
+    </a>
+    <br/><br/><br/>
+    <div th:include="fragments/common/voting-buttons"
+         th:with="aPicture=${picture}"
+         th:remove="tag">
     </div>
-</div>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var app = angular.module('pictureApp', []);
-    app.controller('pointsCtrl', function ($scope, $http) {
-        $scope.action = '';
-        $scope.points = "";
-        $scope.project = {
-            picId: /*[[${aPicture.id}]]*/ null
-        };
-        $http.get('/api/picture/points/' + $scope.project.picId).then(function (response) {
-            $scope.points = response.data;
-        }, function (response) {
-            console.log(response);
-        });
-        $scope.pointClick = function (action) {
-            if($scope.action === action) return;
-            $scope.action = action;
-
-            $http.post('/api/picture/points/' + $scope.project.picId + '?action=' + action).then(function (response) {
-                $scope.points = response.data;
-            }, function (response) {
-                $log.error($location.absUrl() + ": Post error - " + action + " action");
-            })
-        };
-    })
-    /*]]>*/
-</script>
 </body>
 
 
