@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../../static/css/voting-buttons.css" th:href="@{/css/voting-buttons.css}">
+    </head>
+
     <body>
-        + / - zmiana
+        <div class="btn-group" role="group">
+            <button sec:authorize="isAuthenticated()" class="btn btn-success vote-button" th:id="'plus_' + ${aPicture.id}">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button class="btn picture-points" th:id="'picture_' + ${aPicture.id}" th:text="${aPicture.points}"></button>
+            <button sec:authorize="isAuthenticated()" class="btn btn-danger vote-button" th:id="'minus_' + ${aPicture.id}">
+                <span class="glyphicon glyphicon-minus"></span>
+            </button>
+        </div>
     </body>
 </html>
