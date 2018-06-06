@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "PICTURE")
@@ -41,6 +42,9 @@ public class Picture {
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
+
+    @OneToMany
+    private List<Comment> comments;
 
     @Column(columnDefinition = "text")
 //    @Size(min = 100, max = 9000)

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../../static/css/voting-buttons.css" th:href="@{/css/comments.css}">
+    </head>
+
+    <body>
+        <div class="comments-wrapper">
+            <p>Komentarze:</p>
+            <div id="comments">
+                <div th:include="fragments/comments/comment"
+                     th:each="comment: ${aComments}"
+                     th:with="aComment=*{comment}"
+                     th:remove="tag"></div>
+                <div class="no-comments" th:if="${aComments.size()}==0">Brak komentarzy</div>
+            </div>
+
+            <div sec:authorize="isAuthenticated()"  th:include="fragments/comments/new-comment" th:remove="tag"></div>
+        </div>
+    </body>
+</html>

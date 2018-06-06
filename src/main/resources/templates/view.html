@@ -8,14 +8,19 @@
 <body>
 
 <div class="gallery-item">
-    <div
-            th:include="fragments/gallery/picture"
-            th:with="aPicture=${actualPicture}">
+    <div th:include="fragments/gallery/picture"
+         th:with="aPicture=${actualPicture}">
     </div>
-<br/><br/>
+
+    <br/><br/>
+
     <div class="article-item" th:if="${actualPicture.article} != null">
         <p th:text="${actualPicture.article}"></p>
     </div>
+
+    <div th:include="fragments/comments/comments-list"
+         th:remove="tag"
+         th:with="aComments=${actualPicture.comments}"></div>
 </div>
 
 </body>

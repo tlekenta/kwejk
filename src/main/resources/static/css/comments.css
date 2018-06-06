@@ -1,0 +1,46 @@
+.comment {
+    padding: 1% 1% 0 1%;
+    border: solid navajowhite 2px;
+    margin: 2%;
+    background: #005157;
+    color: cadetblue;
+}
+
+.comment-description {
+    text-align: right;
+    color: lightgrey;
+}
+
+.comments-wrapper {
+    margin-top: 15px;
+    padding: 1% 3% 3% 3%;
+    border: solid navajowhite 2px;
+    background: #323742;
+}
+
+.comments-wrapper p {
+    font-size: large;
+    color: navajowhite;
+    padding-left: 3%;
+}
+
+.no-comments {
+    font-size: large;
+    color: lightgrey;
+    padding-left: 4%;
+    padding-bottom: 15px;
+}
+
+.new-comment-wrapper {
+    padding: 3%;
+    border: solid navajowhite 2px;
+    background: #006e74;
+}
+
+.new-comment-wrapper label {
+    color: navajowhite;
+}
+
+.new-comment-wrapper textarea {
+    margin-bottom: 5px;
+}
