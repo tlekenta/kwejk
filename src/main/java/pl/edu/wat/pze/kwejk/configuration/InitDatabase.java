@@ -10,7 +10,7 @@ import pl.edu.wat.pze.kwejk.repository.CommentRepository;
 import pl.edu.wat.pze.kwejk.repository.PictureRepository;
 import pl.edu.wat.pze.kwejk.repository.UserRepository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -45,25 +45,25 @@ public class InitDatabase {
                         null,
                         admin,
                         "komentarz admina do obrazka 2",
-                        LocalDate.of(2018, 5, 30)
+                        LocalDateTime.of(2018, 5, 30, 18, 30)
                 ),
                 new Comment(
                         null,
                         admin,
                         "drugi komentarz admina do obrazka 2",
-                        LocalDate.of(2018, 5, 30)
+                        LocalDateTime.of(2018, 5, 30, 18, 32)
                 ),
                 new Comment(
                         null,
                         admin,
                         "komentarz admina do obrazka 3",
-                        LocalDate.of(2018, 5, 30)
+                        LocalDateTime.of(2018, 5, 30, 18, 40)
                 ),
                 new Comment(
                         null,
                         admin,
                         "komentarz admina do obrazka 4",
-                        LocalDate.of(2018, 5, 30)
+                        LocalDateTime.of(2018, 5, 30, 18, 50)
                 )
         };
     }

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -24,6 +24,6 @@ public class Comment {
     @Column(columnDefinition = "text")
     private String commentText;
 
-    private LocalDate postDate;
+    private LocalDateTime postDate;
 
 }

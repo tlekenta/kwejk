@@ -24,6 +24,13 @@
     padding-left: 3%;
 }
 
+.no-comments {
+    font-size: large;
+    color: lightgrey;
+    padding-left: 4%;
+    padding-bottom: 15px;
+}
+
 .new-comment-wrapper {
     padding: 3%;
     border: solid navajowhite 2px;

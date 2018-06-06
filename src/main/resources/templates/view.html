@@ -18,7 +18,9 @@
         <p th:text="${actualPicture.article}"></p>
     </div>
 
-    <div th:include="fragments/comments/comments-list" th:remove="tag"></div>
+    <div th:include="fragments/comments/comments-list"
+         th:remove="tag"
+         th:with="aComments=${actualPicture.comments}"></div>
 </div>
 
 </body>

@@ -3,10 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
         <div class="comment">
-            comment
-            <div class="comment-description">
-                author, date
-            </div>
+            <span th:text="${aComment.commentText}"></span>
+            <div class="comment-description" th:text="${aComment.user.username} + ', ' + ${aComment.postDate}"></div>
         </div>
     </body>
 </html>

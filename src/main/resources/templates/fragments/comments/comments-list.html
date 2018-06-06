@@ -9,12 +9,11 @@
     <body>
         <div class="comments-wrapper">
             <p>Komentarze:</p>
-            <div th:include="fragments/comments/comment" th:remove="tag"></div>
-            <div th:include="fragments/comments/comment" th:remove="tag"></div>
-            <div th:include="fragments/comments/comment" th:remove="tag"></div>
-            <div th:include="fragments/comments/comment" th:remove="tag"></div>
-            <div th:include="fragments/comments/comment" th:remove="tag"></div>
-
+            <div th:include="fragments/comments/comment"
+                 th:each="comment: ${aComments}"
+                 th:with="aComment=*{comment}"
+                 th:remove="tag"></div>
+            <div class="no-comments" th:if="${aComments.size()}==0">Brak komentarzy</div>
 
             <!--<div sec:authorize="isAuthenticated()"  th:include="fragments/comments/new-comment" th:remove="tag"></div>-->
             <div th:include="fragments/comments/new-comment" th:remove="tag"></div>
