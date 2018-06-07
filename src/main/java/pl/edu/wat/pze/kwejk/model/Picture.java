@@ -47,7 +47,7 @@ public class Picture {
     private List<Comment> comments;
 
     @Column(columnDefinition = "text")
-//    @Size(min = 100, max = 9000)
+    @Size(max = 500000)
     private String article;
 
     @Override

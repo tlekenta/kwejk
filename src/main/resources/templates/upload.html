@@ -7,12 +7,65 @@
     <link rel="stylesheet" type="text/css" href="../static/css/upload.css" th:href="@{/css/upload.css}">
 </head>
 <body>
-<div sec:authorize="isAuthenticated()" th:include="fragments/upload/logged"></div>
-<div sec:authorize="!isAuthenticated()" th:include="fragments/upload/unlogged"></div>
-<!-- switch na artykul - do zrobienia -->
-<!--<div inp type="" contentEditable="true">asdasda <img-->
-<!--src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1"/>-->
-<!--</div>-->
+<div sec:authorize="!isAuthenticated()" th:include="fragments/common/unlogged"></div>
+<div sec:authorize="isAuthenticated()">
+    <div class="defaultContainer">
+
+        <form method="POST" th:action="@{/upload}" th:object="${picture}"
+              enctype="multipart/form-data">
+            <!-- TITLE -->
+            <div class="form-group">
+                <input type="text"
+                       placeholder="Tytuł"
+                       maxlength="30"
+                       th:field="*{title}"/>
+                <p class="errorMessage" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            </div>
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+            <textarea class="form-control description"
+                      type="text"
+                      maxlength="150"
+                      rows="3"
+                      placeholder="Opis"
+                      th:field="*{description}">
+            </textarea>
+                <p class="errorMessage" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+            </div>
+            <!-- PICTURE -->
+            <div class="form-group">
+                <label for="file" class="btn btn-primary">
+                    <i class="fa fa-cloud-upload"></i> Dodaj zdjęcie
+                </label>
+                <input class="inputFile" type="file" name="file" id="file"/>
+                <p class="errorMessage" th:text="${errorMessage} != null ? ${errorMessage}"></p>
+            </div>
+            <!-- ARTICLE  -->
+            <button type="button" class="btn btn-primary artBtn">Dodaj artykuł</button>
+            <br/><br/>
+            <div class="form-group">
+            <textarea th:class="${dirtyArt==true} ?
+                    @{article-show form-control art} :
+                    @{article-hide form-control art}"
+                      type="text"
+                      maxlength="50000"
+                      rows="25"
+                      placeholder="Artykuł.."
+                      th:field="*{article}">
+            </textarea>
+                <p class="errorMessage" th:if="${#fields.hasErrors('article')}" th:errors="*{article}">
+            </div>
+            <br/>
+            <!-- SUBMIT -->
+            <button type="submit" class="btn btn-success" th:text="Dodaj">Dodaj</button>
+        </form>
+        <br/>
+        <div class="center " th:if="${succeedMessage} != null">
+            <p class="succeedMessage" th:text="${succeedMessage}"></p>
+            <a th:href="@{'/view/' + ${picture.id}}">Zobacz co zrobiłeś!</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

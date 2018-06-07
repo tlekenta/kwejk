@@ -11,8 +11,8 @@
     <a th:href="@{'/view/' + ${aPicture.id}}">
         <div class="picture-title" th:text="${aPicture.title}"></div>
     </a>
-    <div class="picture-date" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
-    <div class="picture-date" th:text="${aPicture.user.username}"></div>
+    <div class="picture-info" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
+    <div class="picture-info" th:text="${aPicture.user.username}"></div>
     <br/>
     <div class="picture-description" th:text="${aPicture.description}"></div>
     <a th:href="@{'/view/' + ${aPicture.id}}">

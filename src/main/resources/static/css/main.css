@@ -1,3 +1,16 @@
 .main{
     background: #171a1e;
 }
+
+.whiteCentered {
+    color: whitesmoke;
+    margin: 2% 10%;
+    padding: 1% 5% 5% 5%;
+    font-size: medium;
+}
+
+.defaultContainer {
+    background: black;
+    margin: 2% 10%;
+    padding: 1% 5% 5% 5%;
+}

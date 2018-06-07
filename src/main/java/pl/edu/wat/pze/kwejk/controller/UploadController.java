@@ -42,6 +42,8 @@ public class UploadController {
                       BindingResult bindingResult,
                       Model model) {
         model.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.UPLOAD);
+        model.addAttribute("dirtyArt", false);
+        if(picture.getArticle()!=null && !picture.getArticle().equals("")) model.addAttribute("dirtyArt", true);
 
         if (bindingResult.hasErrors())
             return "index";
@@ -50,7 +52,6 @@ public class UploadController {
         if (validateResult == PicValidEnum.OK) {
             picture = preparePicture(picture, file);
             pictureService.save(picture);
-            model.addAttribute("uploadedImagePath", picture.getPath());
             model.addAttribute("succeedMessage", "Udało się!");
         } else
             model.addAttribute("errorMessage", getResultMessage(validateResult));
