@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-    <head>
-        <link rel="stylesheet" type="text/css" href="../../static/css/header.css" th:href="@{/css/header.css}">
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/header.css" th:href="@{/css/header.css}">
+</head>
 
-    <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">KJEWK</a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Główna</a></li>
-                        <li><a href="#">Top miesiąca</a></li>
-                        <li><a href="#">Top roku</a></li>
-                        <li><a href="/upload">Dodaj</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li sec:authorize="isAuthenticated()">
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">KJEWK</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Główna</a></li>
+                <li><a href="#">Top miesiąca</a></li>
+                <li><a href="#">Top roku</a></li>
+                <li><a href="/upload">Dodaj</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li style="display: inline-flex;" sec:authorize="isAuthenticated()">
 
-                            <a href="/logout">
-                                <span style="margin-right: 1rem;" sec:authentication="name"></span>
-                                <span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a>
-                        </li>
+                    <a th:href="@{'/profile/' + ${#authentication.getPrincipal().getUsername()}}"><span
+                            style="margin-right: 1px;" sec:authentication="name"></span></a>
+                    <a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Wyloguj się</a>
+                </li>
 
-                        <li style="display: inline-flex;" sec:authorize="!isAuthenticated()">
-                            <a href="/register"><span class="glyphicon glyphicon-log-in"></span> Rejestracja</a>
-                            <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </body>
+                <li style="display: inline-flex;" sec:authorize="!isAuthenticated()">
+                    <a href="/register"><span class="glyphicon glyphicon-log-in"></span> Rejestracja</a>
+                    <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
 </html>

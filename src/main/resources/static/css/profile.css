@@ -1,0 +1,10 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(14,32,36,0.95);
+    max-width: 300px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    color: rgba(230,210,160,0.95);
+}
+

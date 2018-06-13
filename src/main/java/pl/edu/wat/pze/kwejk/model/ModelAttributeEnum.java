@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 public enum ModelAttributeEnum {
     /*COMMON*/
     ACTIVE_VIEW("activeView"),
+    ACTIVE_ENDPOINT("activeEndpoint"),
 
     /*PAGINATION*/
     ACTUAL_PAGE_NUMBER("actualPageNumber"),
@@ -16,9 +17,11 @@ public enum ModelAttributeEnum {
     PICTURES_LIST("picturesList"),
 
     /*VIEW(ARTICLE=PICTURE)*/
-    ACTUAL_PICTURE("actualPicture"),
-    ;
+    CURRENT_PICTURE("actualPicture"),
 
+    /*PROFILE*/
+    HAS_PICTURES("hasPictures"),
+    ;
 
     private final String attributeName;
 

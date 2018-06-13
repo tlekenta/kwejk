@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Profil użytkownika</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/profile.css" th:href="@{/css/profile.css}">
+</head>
+<body>
+
+<div class="card">
+    <h1>Profil użytkownika</h1>
+    <h2 th:text="${userName}"></h2>
+</div>
+
+<div th:if="${hasPictures}" th:include="gallery"></div>
+</body>
+</html>

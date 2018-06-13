@@ -5,9 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import pl.edu.wat.pze.kwejk.model.Picture;
+import pl.edu.wat.pze.kwejk.model.User;
 
 public interface PaginationRepository extends PagingAndSortingRepository<Picture, Long> {
-    @Override
-    @Query("SELECT p FROM Picture p ORDER BY p.date desc")
-    Page<Picture> findAll(Pageable pageable);
+
+    Page<Picture> findAllByOrderByDateDesc(Pageable pageable);
+    Page<Picture> findAllByUserOrderByDateDesc(Pageable pageable, User user);
 }
