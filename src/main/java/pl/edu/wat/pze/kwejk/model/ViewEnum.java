@@ -9,4 +9,5 @@ public enum ViewEnum {
     LOGIN,
     REGISTER,
     UPLOAD,
+    PROFILE,
 }

@@ -12,6 +12,7 @@ public class PaginationService {
 
     private static final int MAX_NUMBER_OF_PAGES_TO_DISPLAY = 7;
     public static final int NUMBER_OF_PICS_ON_PAGE = 4;
+    private static int MAX_PAGE;
 
     private PictureService pictureService;
 
@@ -20,9 +21,26 @@ public class PaginationService {
         this.pictureService = pictureService;
     }
 
+    /**
+     * List of all pages
+     * @param aActivePage
+     * @return
+     */
     public List<Integer> getPagesList(Integer aActivePage) {
-        final int MAX_PAGE = pictureService.getMaxPage();
+        return doSearch(aActivePage, pictureService.getMaxPage());
+    }
 
+    /**
+     * List of pages on profile with @username
+     * @param aActivePage
+     * @param userName
+     * @return
+     */
+    public List<Integer> getPagesList(Integer aActivePage, String userName) {
+        return doSearch(aActivePage, pictureService.getMaxPage(userName));
+    }
+
+    private List<Integer> doSearch(Integer aActivePage, int MAX_PAGE) {
         if (aActivePage <= Math.min(MAX_PAGE, MAX_NUMBER_OF_PAGES_TO_DISPLAY) / 2)
             return getFirstPages(aActivePage, MAX_PAGE);
         else if (aActivePage > MAX_PAGE - Math.min(MAX_PAGE, MAX_NUMBER_OF_PAGES_TO_DISPLAY) / 2)

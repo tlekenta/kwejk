@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.edu.wat.pze.kwejk.model.ModelAttributeEnum;
 import pl.edu.wat.pze.kwejk.model.Picture;
 import pl.edu.wat.pze.kwejk.model.ViewEnum;
-import pl.edu.wat.pze.kwejk.service.ArticleService;
 import pl.edu.wat.pze.kwejk.service.PictureService;
 
 @Controller
@@ -30,7 +29,7 @@ public class ViewController {
         Picture p = pictureService.getPictureById(pictureId);
         System.out.println(p.getPath());
         aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.VIEW);
-        aModel.addAttribute(ModelAttributeEnum.ACTUAL_PICTURE.toString(), pictureService.getPictureById(pictureId));
+        aModel.addAttribute(ModelAttributeEnum.CURRENT_PICTURE.toString(), pictureService.getPictureById(pictureId));
 
         return "index";
     }

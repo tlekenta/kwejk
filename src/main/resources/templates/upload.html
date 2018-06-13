@@ -60,7 +60,7 @@
             <button type="submit" class="btn btn-success" th:text="Dodaj">Dodaj</button>
         </form>
         <br/>
-        <div class="center " th:if="${succeedMessage} != null">
+        <div class="center" th:if="${succeedMessage} != null">
             <p class="succeedMessage" th:text="${succeedMessage}"></p>
             <a th:href="@{'/view/' + ${picture.id}}">Zobacz co zrobiłeś!</a>
         </div>
