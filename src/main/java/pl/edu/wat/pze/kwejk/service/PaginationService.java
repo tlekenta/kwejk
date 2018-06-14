@@ -2,6 +2,7 @@ package pl.edu.wat.pze.kwejk.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.wat.pze.kwejk.model.TopEnum;
 
 import java.text.MessageFormat;
 import java.util.LinkedList;
@@ -38,6 +39,10 @@ public class PaginationService {
      */
     public List<Integer> getPagesList(Integer aActivePage, String userName) {
         return doSearch(aActivePage, pictureService.getMaxPage(userName));
+    }
+
+    public List<Integer> getPagesList(Integer aActivePage, TopEnum top) {
+        return doSearch(aActivePage, pictureService.getMaxPage(top));
     }
 
     private List<Integer> doSearch(Integer aActivePage, int MAX_PAGE) {

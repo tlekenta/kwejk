@@ -8,21 +8,23 @@
 
 <body>
 
-    <a th:href="@{'/view/' + ${aPicture.id}}">
-        <div class="picture-title" th:text="${aPicture.title}"></div>
-    </a>
-    <div class="picture-info" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
+<a th:href="@{'/view/' + ${aPicture.id}}">
+    <div class="picture-title" th:text="${aPicture.title}"></div>
+</a>
+<div class="picture-info" th:text="${#dates.format(aPicture.date, 'dd MMM yyyy HH:mm')}"></div>
+<a th:href="@{/profile/} + ${aPicture.user.username}">
     <div class="picture-info" th:text="${aPicture.user.username}"></div>
-    <br/>
-    <div class="picture-description" th:text="${aPicture.description}"></div>
-    <a th:href="@{'/view/' + ${aPicture.id}}">
-        <img th:src="@{/img/} + ${aPicture.path}"/>
-    </a>
-    <br/><br/><br/>
-    <div th:include="fragments/common/voting-buttons"
-         th:with="aPicture=${aPicture}"
-         th:remove="tag">
-    </div>
+</a>
+<br/>
+<div class="picture-description" th:text="${aPicture.description}"></div>
+<a th:href="@{'/view/' + ${aPicture.id}}">
+    <img th:src="@{/img/} + ${aPicture.path}"/>
+</a>
+<br/><br/><br/>
+<div th:include="fragments/common/voting-buttons"
+     th:with="aPicture=${aPicture}"
+     th:remove="tag">
+</div>
 
 </body>
 

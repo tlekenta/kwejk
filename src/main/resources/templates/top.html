@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Top</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/profile.css" th:href="@{/css/profile.css}">
+
+</head>
+<body>
+<div class="card">
+    <h2 th:text="${top}"></h2>
+</div>
+
+<div th:include="gallery"></div>
+</body>
+</html>

@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.edu.wat.pze.kwejk.model.ModelAttributeEnum;
+import pl.edu.wat.pze.kwejk.model.TopEnum;
 import pl.edu.wat.pze.kwejk.model.ViewEnum;
 import pl.edu.wat.pze.kwejk.service.PaginationService;
 import pl.edu.wat.pze.kwejk.service.PictureService;
+
+import java.util.Calendar;
 
 @Controller
 public class GalleryController {
@@ -42,6 +45,30 @@ public class GalleryController {
         return "index.html";
     }
 
+    @GetMapping(value = {"/top/{period}", "/top/{period}/{aPageNumber}"})
+    public String getGalleryForTop(@PathVariable String period, @PathVariable(required = false) Integer aPageNumber,
+                                   Model aModel) {
+        if (aPageNumber == null)
+            aPageNumber = 1;
+        TopEnum top = TopEnum.TOP_YEAR;
+        aModel.addAttribute("top", "Top Roku");
+        if (period.equals("month")) {
+            top = TopEnum.TOP_MONTH;
+            aModel.addAttribute("top", "Top Miesiąca");
+        }
+
+        aModel.addAttribute(ModelAttributeEnum.ACTIVE_VIEW.toString(), ViewEnum.TOP);
+        aModel.addAttribute(ModelAttributeEnum.ACTIVE_ENDPOINT.toString(), "/top/" + period + "/");
+        aModel.addAttribute(ModelAttributeEnum.ACTUAL_PAGE_NUMBER.toString(), aPageNumber);
+        aModel.addAttribute(ModelAttributeEnum.LAST_PAGE_NUMBER.toString(), pictureService.getMaxPage(top));
+        aModel.addAttribute(ModelAttributeEnum.PICTURES_LIST.toString(),
+                pictureService.getPicturesForPage(aPageNumber, top));
+        aModel.addAttribute(ModelAttributeEnum.PAGES_NUMBERS_LIST.toString(),
+                paginationService.getPagesList(aPageNumber, top));
+
+        return "index";
+
+    }
 
 
 }
