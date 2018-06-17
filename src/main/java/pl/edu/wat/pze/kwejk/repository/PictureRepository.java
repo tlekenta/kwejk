@@ -10,5 +10,5 @@ import java.util.Date;
 public interface PictureRepository extends JpaRepository<Picture, Long> {
 
     int countAllByDateAfter(Date date);
-    int countByTitleContaining(String title);
+    int countByTitleContainingOrDescriptionContaining(String title, String description);
 }

@@ -16,5 +16,5 @@ public interface PaginationRepository extends PagingAndSortingRepository<Picture
     Page<Picture> findAllByOrderByDateDesc(Pageable pageable);
     Page<Picture> findAllByUserOrderByDateDesc(Pageable pageable, User user);
     Page<Picture> findAllByDateAfterOrderByPointsDesc(Pageable pageable, Date date);
-    Page<Picture> findByTitleContaining(Pageable pageable, String title);
+    Page<Picture> findByTitleContainingOrDescriptionContaining(Pageable pageable, String title, String description);
 }

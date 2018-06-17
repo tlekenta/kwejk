@@ -52,7 +52,7 @@ public class PictureService {
 
     public int getMaxPageForKeyWord(String keyWord) {
         return (int) Math.ceil(1.0 *
-                pictureRepository.countByTitleContaining(keyWord)
+                pictureRepository.countByTitleContainingOrDescriptionContaining(keyWord, keyWord)
                 / PaginationService.NUMBER_OF_PICS_ON_PAGE);
     }
 
@@ -79,8 +79,8 @@ public class PictureService {
     }
 
     public List<Picture> findPicturesByKeyWord(int aPageNumber, String keyWord) {
-        return paginationRepository.findByTitleContaining(
-                PageRequest.of(aPageNumber - 1, PaginationService.NUMBER_OF_PICS_ON_PAGE), keyWord).getContent();
+        return paginationRepository.findByTitleContainingOrDescriptionContaining(
+                PageRequest.of(aPageNumber - 1, PaginationService.NUMBER_OF_PICS_ON_PAGE), keyWord, keyWord).getContent();
     }
 
     public Picture getPictureById(Long id) {

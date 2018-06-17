@@ -14,3 +14,8 @@
     margin: 2% 10%;
     padding: 1% 5% 5% 5%;
 }
+
+.search-form {
+    margin: 0 auto;
+    width:250px;
+}

@@ -7,6 +7,7 @@ public enum ModelAttributeEnum {
     /*COMMON*/
     ACTIVE_VIEW("activeView"),
     ACTIVE_ENDPOINT("activeEndpoint"),
+    HAS_PICTURES("hasPictures"),
 
     /*PAGINATION*/
     ACTUAL_PAGE_NUMBER("actualPageNumber"),
@@ -19,8 +20,9 @@ public enum ModelAttributeEnum {
     /*VIEW(ARTICLE=PICTURE)*/
     CURRENT_PICTURE("actualPicture"),
 
-    /*PROFILE*/
-    HAS_PICTURES("hasPictures"),
+    /*SEARCH*/
+    KEY_WORD("keyWord"),
+    NO_RESULT("noResult")
     ;
 
     private final String attributeName;
