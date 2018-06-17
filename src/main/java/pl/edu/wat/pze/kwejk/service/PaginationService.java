@@ -45,6 +45,10 @@ public class PaginationService {
         return doSearch(aActivePage, pictureService.getMaxPage(top));
     }
 
+    public List<Integer> getPagesListForSearchResult(Integer aActivePage, String keyWord) {
+        return doSearch(aActivePage, pictureService.getMaxPageForKeyWord(keyWord));
+    }
+
     private List<Integer> doSearch(Integer aActivePage, int MAX_PAGE) {
         if (aActivePage <= Math.min(MAX_PAGE, MAX_NUMBER_OF_PAGES_TO_DISPLAY) / 2)
             return getFirstPages(aActivePage, MAX_PAGE);

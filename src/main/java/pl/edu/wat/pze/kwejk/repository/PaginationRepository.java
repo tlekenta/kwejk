@@ -7,6 +7,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import pl.edu.wat.pze.kwejk.model.Picture;
 import pl.edu.wat.pze.kwejk.model.User;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public interface PaginationRepository extends PagingAndSortingRepository<Picture, Long> {
@@ -14,4 +16,5 @@ public interface PaginationRepository extends PagingAndSortingRepository<Picture
     Page<Picture> findAllByOrderByDateDesc(Pageable pageable);
     Page<Picture> findAllByUserOrderByDateDesc(Pageable pageable, User user);
     Page<Picture> findAllByDateAfterOrderByPointsDesc(Pageable pageable, Date date);
+    Page<Picture> findByTitleContaining(Pageable pageable, String title);
 }

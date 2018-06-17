@@ -11,4 +11,5 @@ public enum ViewEnum {
     REGISTER,
     UPLOAD,
     PROFILE,
+    SEARCH
 }

@@ -15,7 +15,10 @@ import pl.edu.wat.pze.kwejk.repository.PictureRepository;
 import pl.edu.wat.pze.kwejk.repository.UserRepository;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -38,12 +41,18 @@ public class PictureService {
                 / PaginationService.NUMBER_OF_PICS_ON_PAGE);
     }
 
-    public int  getMaxPage(TopEnum top) {
+    public int getMaxPage(TopEnum top) {
         int currYear = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH);
         if (top == TopEnum.TOP_YEAR) month = 0;
         return (int) Math.ceil(1.0 *
                 pictureRepository.countAllByDateAfter(new GregorianCalendar(currYear, month, 1).getTime())
+                / PaginationService.NUMBER_OF_PICS_ON_PAGE);
+    }
+
+    public int getMaxPageForKeyWord(String keyWord) {
+        return (int) Math.ceil(1.0 *
+                pictureRepository.countByTitleContaining(keyWord)
                 / PaginationService.NUMBER_OF_PICS_ON_PAGE);
     }
 
@@ -66,7 +75,12 @@ public class PictureService {
 
         return paginationRepository.findAllByDateAfterOrderByPointsDesc(PageRequest.of(aPageNumber - 1,
                 PaginationService
-                .NUMBER_OF_PICS_ON_PAGE), new GregorianCalendar(currYear, month, 1).getTime()).getContent();
+                        .NUMBER_OF_PICS_ON_PAGE), new GregorianCalendar(currYear, month, 1).getTime()).getContent();
+    }
+
+    public List<Picture> findPicturesByKeyWord(int aPageNumber, String keyWord) {
+        return paginationRepository.findByTitleContaining(
+                PageRequest.of(aPageNumber - 1, PaginationService.NUMBER_OF_PICS_ON_PAGE), keyWord).getContent();
     }
 
     public Picture getPictureById(Long id) {
